@@ -4,6 +4,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES ? '/integral-lead-qualifier/' : '/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
