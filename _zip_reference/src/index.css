@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #f7f9ff;
+  --color-on-surface: #061d2f;
+  --color-on-surface-variant: #45464e;
+  --color-primary: #000000;
+  --color-secondary: #914c00;
+  --color-secondary-container: #fca153;
+  --color-on-secondary-container: #6f3900;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #edf4ff;
+  --color-surface-container-high: #d9eaff;
+  --color-surface-container: #e3efff;
+  --color-primary-container: #0e1a3b;
+  --color-on-primary-container: #7882a9;
+  --color-tertiary-fixed: #cfe5fe;
+  --color-on-tertiary-fixed: #061d2f;
+  --color-outline-variant: #c6c6cf;
+
+  --font-headline: "Playfair Display", serif;
+  --font-body: "Raleway", sans-serif;
+  --font-label: "Raleway", sans-serif;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}

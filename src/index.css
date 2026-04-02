@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #f7f9ff;
+  --color-on-surface: #061d2f;
+  --color-on-surface-variant: #45464e;
+  --color-primary: #000000;
+  --color-secondary: #914c00;
+  --color-secondary-container: #fca153;
+  --color-on-secondary-container: #6f3900;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #edf4ff;
+  --color-surface-container-high: #d9eaff;
+  --color-surface-container: #e3efff;
+  --color-primary-container: #0e1a3b;
+  --color-on-primary-container: #7882a9;
+  --color-tertiary-fixed: #cfe5fe;
+  --color-on-tertiary-fixed: #061d2f;
+  --color-outline-variant: #c6c6cf;
+  --color-navy: #051132;
+  --color-accent: #CD7A30;
+  --color-success: #27AE60;
+  --color-warning: #F39C12;
+  --color-danger: #E74C3C;
+
+  --font-headline: "Playfair Display", serif;
+  --font-body: "Raleway", sans-serif;
+  --font-label: "Raleway", sans-serif;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: #cbd5e1;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.toggle-switch.active {
+  background: var(--color-danger);
+}
+.toggle-switch.active-green {
+  background: var(--color-success);
+}
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.toggle-switch.active::after,
+.toggle-switch.active-green::after {
+  transform: translateX(22px);
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
+}
+.pulse-danger {
+  animation: pulse-glow 2s infinite;
+}
