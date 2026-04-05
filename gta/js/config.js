@@ -1,0 +1,55 @@
+// ===== GAME CONFIGURATION =====
+const CONFIG = {
+    // World
+    WORLD_WIDTH: 4000,
+    WORLD_HEIGHT: 4000,
+    TILE_SIZE: 40,
+    BLOCK_SIZE: 400,
+
+    // Player
+    PLAYER_SPEED: 2.5,
+    PLAYER_SPRINT_SPEED: 4.5,
+    PLAYER_SIZE: 12,
+    PLAYER_MAX_HEALTH: 100,
+    PLAYER_COLOR: '#00ccff',
+
+    // Vehicles
+    CAR_ACCEL: 0.08,
+    CAR_MAX_SPEED: 6,
+    CAR_BRAKE: 0.15,
+    CAR_FRICTION: 0.02,
+    CAR_TURN_SPEED: 0.035,
+    SPORTS_MAX_SPEED: 9,
+    TRUCK_MAX_SPEED: 4,
+
+    // NPCs
+    NPC_COUNT: 60,
+    NPC_SPEED: 1.2,
+    NPC_SIZE: 10,
+
+    // Police
+    POLICE_SPEED: 3,
+    POLICE_CAR_SPEED: 7,
+    POLICE_CHASE_DIST: 300,
+    WANTED_DECAY_TIME: 10000,
+
+    // Vehicles parked
+    PARKED_CAR_COUNT: 40,
+
+    // Bullets
+    BULLET_SPEED: 10,
+    BULLET_DAMAGE: 25,
+    BULLET_RANGE: 400,
+    SHOOT_COOLDOWN: 200,
+
+    // Pickups
+    MONEY_PICKUP_COUNT: 15,
+    HEALTH_PICKUP_COUNT: 8,
+
+    // Colors
+    ROAD_COLOR: '#333340',
+    SIDEWALK_COLOR: '#555560',
+    GRASS_COLOR: '#2a5a1a',
+    BUILDING_COLORS: ['#664433', '#556677', '#887766', '#776655', '#998877', '#445566', '#663344', '#554455'],
+    WATER_COLOR: '#1a3a5c',
+};
