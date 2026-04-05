@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA 3D - Open World City</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #000; overflow: hidden; font-family: 'Courier New', monospace; }
+        canvas { display: block; }
+
+        #hud {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none; z-index: 10;
+        }
+        #health-bar {
+            position: absolute; top: 15px; left: 15px;
+            background: rgba(0,0,0,0.6); padding: 8px 14px; border-radius: 4px;
+        }
+        #health-fill { height: 8px; background: #0f0; border-radius: 3px; transition: width 0.3s; }
+        #health-bg { width: 160px; height: 8px; background: #333; border-radius: 3px; }
+        #health-text { color: #fff; font-size: 11px; margin-bottom: 4px; }
+
+        #money-display {
+            position: absolute; top: 15px; right: 15px;
+            color: #0f0; font-size: 22px; font-weight: bold;
+            text-shadow: 2px 2px 4px #000;
+            background: rgba(0,0,0,0.6); padding: 8px 16px; border-radius: 4px;
+        }
+        #wanted-display {
+            position: absolute; top: 55px; right: 15px;
+            font-size: 26px; text-shadow: 2px 2px 4px #000;
+            background: rgba(0,0,0,0.6); padding: 4px 12px; border-radius: 4px;
+        }
+        #speed-display {
+            position: absolute; bottom: 15px; right: 15px;
+            color: #fff; font-size: 18px;
+            text-shadow: 2px 2px 4px #000;
+            background: rgba(0,0,0,0.6); padding: 8px 14px; border-radius: 4px;
+            display: none;
+        }
+        #mission-display {
+            position: absolute; bottom: 15px; left: 15px;
+            color: #ffcc00; font-size: 13px;
+            text-shadow: 1px 1px 3px #000;
+            background: rgba(0,0,0,0.6); padding: 8px 14px; border-radius: 4px;
+        }
+        #center-msg {
+            position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);
+            color: #ffcc00; font-size: 32px; font-weight: bold;
+            text-shadow: 3px 3px 6px #000; text-align: center;
+            opacity: 0; transition: opacity 0.4s;
+        }
+        #controls-hint {
+            position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.5); font-size: 11px; text-align: center;
+        }
+        #minimap {
+            position: absolute; bottom: 15px; left: 15px;
+            width: 170px; height: 170px;
+            border: 2px solid rgba(255,255,255,0.4); border-radius: 4px;
+            margin-top: 45px;
+        }
+
+        /* Start screen */
+        #start-screen {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 100; pointer-events: all;
+        }
+        #start-screen h1 {
+            font-size: 80px; color: #ffcc00; letter-spacing: 12px;
+            text-shadow: 4px 4px 0 #ff6600, 8px 8px 0 #cc0000;
+            margin-bottom: 10px; animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        #start-screen h2 { font-size: 28px; color: #aaa; margin-bottom: 50px; font-weight: normal; letter-spacing: 6px; }
+        .start-btn {
+            padding: 18px 60px; font-size: 26px; background: #ffcc00; color: #000;
+            border: none; cursor: pointer; font-family: 'Courier New', monospace;
+            font-weight: bold; letter-spacing: 4px; pointer-events: all; transition: all 0.2s;
+        }
+        .start-btn:hover { background: #ff9900; transform: scale(1.05); }
+        #start-screen .info { margin-top: 40px; color: #555; font-size: 13px; text-align: center; line-height: 1.8; }
+    </style>
+</head>
+<body>
+    <div id="start-screen">
+        <h1>GTA 3D</h1>
+        <h2>OPEN WORLD CITY</h2>
+        <button class="start-btn" onclick="startGame()">SPIELEN</button>
+        <div class="info">
+            WASD = Bewegen/Fahren &bull; F = Auto ein/aussteigen &bull; SPACE = Bremsen<br>
+            Maus = Umsehen/Zielen &bull; Klick = Schie&szlig;en &bull; SHIFT = Sprinten &bull; R = Kamera wechseln
+        </div>
+    </div>
+
+    <div id="hud" style="display:none;">
+        <div id="health-bar">
+            <div id="health-text">❤ 100</div>
+            <div id="health-bg"><div id="health-fill" style="width:100%"></div></div>
+        </div>
+        <div id="money-display">$ 0</div>
+        <div id="wanted-display">☆☆☆☆☆</div>
+        <div id="speed-display">0 km/h</div>
+        <div id="mission-display">Mission wird geladen...</div>
+        <div id="center-msg"></div>
+        <div id="controls-hint">WASD = Bewegen | F = Auto | SPACE = Bremse | Maus = Umsehen | Klick = Schießen | SHIFT = Sprint</div>
+        <canvas id="minimap" width="170" height="170"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/game3d.js"></script>
+</body>
+</html>
